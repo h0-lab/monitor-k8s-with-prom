@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: prometheussvc
+  labels:
+    app: prometheus
+spec:
+  type: NodePort
+  ports:
+  - name: https
+    port: 9090
+    protocol: TCP
+  selector:
+    app: prometheus
