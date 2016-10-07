@@ -1,0 +1,58 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: consul-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-loadbalancer
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: service-loadbalancer
+        version: v1
+    spec:
+      nodeSelector:
+        role: loadbalancer
+      containers:
+        - name: consul
+          image: consul:v0.6.4
+          args:
+            - "agent"
+            - "-dev"
+          volumeMounts:
+            - mountPath: /var/lib/consul
+              name: data
+          ports:
+            - containerPort: 8500
+              name: ui-port
+            - containerPort: 8400
+              name: alt-port
+            - containerPort: 53
+              name: udp-port
+            - containerPort: 443
+              name: https-port
+            - containerPort: 8080
+              name: http-port
+            - containerPort: 8301
+              name: serflan
+            - containerPort: 8302
+              name: serfwan
+            - containerPort: 8600
+              name: consuldns
+            - containerPort: 8300
+              name: server
+        - name: consul-exporter
+          image: quay.io/prometheus/consul-exporter:master
+          args:
+          - "-consul.server=consul:8500"
+          ports:
+          # exporter
+          - containerPort: 9107
+            hostPort: 9107
+            protocol: TCP
+      volumes:
+        - name: data
+          emptyDir: {}
