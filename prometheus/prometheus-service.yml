@@ -1,8 +1,6 @@
 kind: Service
 apiVersion: v1
 metadata:
-  annotations:
-    prometheus.io/scrape: 'true'
   labels:
     app: prometheus
   name: prometheus
@@ -11,7 +9,7 @@ spec:
   ports:
   - name: webui
     port: 9090
-    nodePort: 39090
+    nodePort: 30090
     protocol: TCP
   selector:
     app: prometheus

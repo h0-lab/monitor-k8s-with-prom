@@ -11,6 +11,9 @@ sum by(pod_name) (container_memory_usage_bytes{namespace="monitoring"})
 # Sum up by prometheus job container memory usage for monitoring namespace for all pods that contain the name "prometheus".
 sum by(job) (container_memory_usage_bytes{namespace="monitoring", pod_name=~"prometheus.*"})
 
+# Inspect how much memory is being used by a certain image
+container_memory_usage_bytes{namespace="default",image=~"datadog/docker-dd-agent:.*"}
+
 ##### We can also do some detective / troubleshooting work as well.
 
 # When was this image last seen running?
