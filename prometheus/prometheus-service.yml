@@ -24,7 +24,7 @@ metadata:
   name: prom-node-exporter
 spec:
   ports:
-  - name: tcp
+  - name: expoter
     port: 9100
     protocol: TCP
   selector:
