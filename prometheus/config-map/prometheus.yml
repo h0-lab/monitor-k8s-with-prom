@@ -7,18 +7,19 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  # Scrape config for cluster components.
-  - job_name: 'kubernetes-cluster'
-    scheme: https
-    tls_config:
-      ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-    kubernetes_sd_configs:
-    - api_servers:
-      - 'https://kubernetes.default.svc'
-      in_cluster: true
-      role: apiserver
+  # Scrape config for apiserver components.
+  # - job_name: 'kubernetes-apiserver'
+  #   scheme: https
+  #   tls_config:
+  #     ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+  #   bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+  #   kubernetes_sd_configs:
+  #   - api_servers:
+  #     - 'https://kubernetes.default.svc'
+  #     in_cluster: true
+  #     role: apiserver
 
+  # Scrape config for nodes.
   - job_name: 'kubernetes-nodes'
     scheme: https
     tls_config:

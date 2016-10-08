@@ -1,14 +1,33 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: prometheus
+  annotations:
+    prometheus.io/scrape: 'true'
   labels:
     app: prometheus
+  name: prometheus
 spec:
-  type: NodePort
   ports:
-    - name: https
-      port: 9090
-      protocol: TCP
+  - name: tcp
+    port: 9090
+    protocol: TCP
   selector:
     app: prometheus
+  type: NodePort
+---
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+    prometheus.io/scrape: 'true'
+  labels:
+    app: prom-node-exporter
+  name: prom-node-exporter
+spec:
+  ports:
+  - name: tcp
+    port: 9100
+    protocol: TCP
+  selector:
+    app: prom-node-exporter
+  type: NodePort

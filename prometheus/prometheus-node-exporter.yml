@@ -1,0 +1,53 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: prom-node-exporter
+spec:
+  template:
+    metadata:
+      labels:
+        app: prom-node-exporter
+      name: prom-node-exporter
+    spec:
+      containers:
+      - args:
+        - -collector.procfs=/host/proc
+        - -collector.sysfs=/host/sys
+        - -collector.filesystem.ignored-mount-points='^/(sys|proc|dev|host|etc)($|/)'
+        image: prom/node-exporter:master
+        name: prom-node-exporter
+        ports:
+        - containerPort: 9100
+          hostPort: 9100
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 10m
+            memory: 10Mi
+          limits:
+            cpu: 100m
+            memory: 50Mi
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /host/proc
+          name: proc
+          readOnly: true
+        - mountPath: /host/sys
+          name: proc
+          readOnly: true
+        - mountPath: /rootfs
+          name: rootfs
+          readOnly: true
+      hostNetwork: true
+      hostPID: true
+      volumes:
+      - hostPath:
+          path: /proc
+        name: proc
+      - hostPath:
+          path: /sys
+        name: sys
+      - hostPath:
+          path: /
+        name: rootfs
