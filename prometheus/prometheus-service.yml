@@ -7,13 +7,14 @@ metadata:
     app: prometheus
   name: prometheus
 spec:
+  type: NodePort
   ports:
-  - name: tcp
+  - name: webui
     port: 9090
+    nodePort: 39090
     protocol: TCP
   selector:
     app: prometheus
-  type: NodePort
 ---
 kind: Service
 apiVersion: v1

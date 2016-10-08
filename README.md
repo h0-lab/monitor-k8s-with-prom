@@ -3,6 +3,9 @@
 ##### Some prep work
 
 ```bash
+# Start minikube.
+minikube start
+
 # First, create the monitoring namespaces.
 kubectl create -f prometheus/monitoring-namespace.yml
 
@@ -38,16 +41,6 @@ kubectl get pods \
 # Open prometheus.
 minikube service prometheus \
   --namespace monitoring
-
-# Recreate the configmap.
-# Waiting for https://github.com/kubernetes/kubernetes/pull/33335
-# to be merged.
-kubectl create configmap prometheus-config \
-  --from-file prometheus/config-map/prometheus.yml \
-  --namespace monitoring
-
-# Pods will need to be killed to pick up the changes.
-# Issue tracking this: https://github.com/kubernetes/kubernetes/issues/22368
 ```
 
 ##### Deploy the Node Exporter
@@ -60,6 +53,20 @@ kubectl create -f prometheus/prometheus-node-exporter.yml \
 # Open prometheus.
 minikube service prom-node-exporter \
   --namespace monitoring
+```
+
+##### Updating the Configmap
+
+```
+# Recreate the configmap.
+# Waiting for https://github.com/kubernetes/kubernetes/pull/33335
+# to be merged.
+kubectl create configmap prometheus-config \
+  --from-file prometheus/config-map/prometheus.yml \
+  --namespace monitoring
+
+# Pods will need to be killed to pick up the changes.
+# Issue tracking this: https://github.com/kubernetes/kubernetes/issues/22368
 ```
 
 ##### Debugging
