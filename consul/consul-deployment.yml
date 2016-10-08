@@ -1,0 +1,57 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: consul
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consul
+  template:
+    metadata:
+      labels:
+        app: consul
+    spec:
+      containers:
+        - name: consul
+          image: consul:v0.6.4
+          args:
+            - "agent"
+            - "-data-dir=/var/lib/consul"
+            - "-server"
+            - "-ui"
+            - "-bootstrap-expect=1"
+            - "-bind=0.0.0.0"
+            - "-client=0.0.0.0"
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/consul
+          ports:
+            - name: ui-port
+              containerPort: 8500
+            - name: alt-port
+              containerPort: 8400
+            - name: udp-port
+              containerPort: 53
+            - name: https-port
+              containerPort: 443
+            - name: http-port
+              containerPort: 8080
+            - name: serflan
+              containerPort: 8301
+            - name: serfwan
+              containerPort: 8302
+            - name: consuldns
+              containerPort: 8600
+            - name: server
+              containerPort: 8300
+        - name: consul-exporter
+          image: prom/consul-exporter:master
+          args:
+          - "-consul.server=localhost:8500"
+          ports:
+          - containerPort: 9107
+            protocol: TCP
+      volumes:
+        - name: data
+          emptyDir: {}

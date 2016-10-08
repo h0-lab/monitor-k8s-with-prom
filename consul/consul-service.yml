@@ -1,0 +1,22 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: consul
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '9107'
+  labels:
+    app: consul
+spec:
+  type: NodePort
+  ports:
+  - name: webui
+    port: 8500
+    targetPort: 8500
+    protocol: TCP
+  - name: exporter
+    port: 9107
+    targetPort: 9107
+    protocol: TCP
+  selector:
+    app: consul

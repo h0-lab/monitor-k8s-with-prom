@@ -119,3 +119,29 @@ kubectl create -f grafana/grafana-import-job.yml \
 minikube service grafana \
   --namespace monitoring
 ```
+
+## Experiments with Consul on Kubernetes
+
+##### Some prep work
+
+```bash
+# Create the service.
+kubectl create -f consul/consul-service.yml \
+  --namespace monitoring
+```
+
+##### Deploy Grafana
+
+```bash
+# Create the deployment.
+kubectl create -f consul/consul-deployment.yml \
+  --namespace monitoring
+
+# Check the deployment.
+kubectl get pods \
+  --namespace monitoring
+
+# Open prometheus.
+minikube service consul \
+  --namespace monitoring
+```
