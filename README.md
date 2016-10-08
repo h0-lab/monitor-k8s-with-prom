@@ -1,33 +1,71 @@
 ## Experiments with Prometheus on Kubernetes
 
+##### Some prep work
+
+```bash
+# First, create the monitoring namespaces.
+kubectl create -f prometheus/monitoring-namespace.yml
+
+# Then, create the config file.
+kubectl create configmap prometheus-config \
+  --from-file prometheus/config-map/prometheus.yml \
+  --output yaml --dry-run > manifests/prometheus-configmap.yml
+
+kubectl create -f manifests/prometheus-configmap.yml \
+  --namespace monitoring
+
+# Verify that we created the config map.
+kubectl get configmaps prometheus-config \
+  --output yaml \
+  --namespace monitoring
+
+# Create the service.
+kubectl create -f prometheus/prometheus-service.yml \
+  --namespace monitoring
+```
+
 ##### Deploy Prometheus
 
 ```bash
-# First, create the config file.
-kubectl create configmap prometheus-config --from-file prometheus/config-map/prometheus.yml
-
-# Verify that we created the config map.
-kubectl get configmaps prometheus-config -o yaml
-
 # Create the deployment.
-kubectl create -f prometheus/prometheus-deployment.yml
+kubectl create -f prometheus/prometheus-deployment.yml \
+  --namespace monitoring
 
-# Create the service.
-kubectl create -f prometheus/prometheus-service.yml
-```
-
-##### Deploy Service Loadbalancer
-
-```bash
-# Inspect and find the `minikube` node.
-kubectl get nodes
-
-# Ensure our node has the correct label.
-kubectl label node minikube role=loadbalancer
-
-# Create the haproxy deployment.
-kubectl create -f ingress/haproxy-deployment.yml
+# Check the deployment.
+kubectl get pods \
+  --namespace monitoring
 
 # Open prometheus.
-open $(minikube ip):9090
+minikube service prometheus \
+  --namespace monitoring
+
+# Recreate the configmap.
+# Waiting for https://github.com/kubernetes/kubernetes/pull/33335
+# to be merged.
+kubectl create configmap prometheus-config \
+  --from-file prometheus/config-map/prometheus.yml \
+  --namespace monitoring
+
+# Pods will need to be killed to pick up the changes.
+# Issue tracking this: https://github.com/kubernetes/kubernetes/issues/22368
+```
+
+##### Deploy the Node Exporter
+
+```bash
+# Next, create the node exporter.
+kubectl create -f prometheus/prometheus-node-exporter.yml \
+  --namespace monitoring
+
+# Open prometheus.
+minikube service prom-node-exporter \
+  --namespace monitoring
+```
+
+##### Debugging
+
+```bash
+# Pods can also be inspected via a shell.
+kubectl exec prom-node-exporter-442ce \
+  --namespace=monitoring -i -t -- sh
 ```
