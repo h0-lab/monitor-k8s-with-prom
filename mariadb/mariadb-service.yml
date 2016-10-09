@@ -1,0 +1,22 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: mariadb
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '9104'
+  labels:
+    app: mariadb
+spec:
+  type: NodePort
+  ports:
+  - name: server
+    port: 3306
+    targetPort: 3306
+    protocol: TCP
+  - name: exporter
+    port: 9104
+    targetPort: 9104
+    protocol: TCP
+  selector:
+    app: mariadb
