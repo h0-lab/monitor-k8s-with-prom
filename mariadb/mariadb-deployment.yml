@@ -38,6 +38,7 @@ spec:
           ports:
           - name: exporter
             containerPort: 9104
+            hostPort: 9104
       volumes:
         - name: data
           emptyDir: {}

@@ -8,10 +8,12 @@ spec:
   selector:
     matchLabels:
       app: consul
+      dc: aws-east
   template:
     metadata:
       labels:
         app: consul
+        dc: aws-east
       annotations:
         pod.alpha.kubernetes.io/initialized: "true"
     spec:
@@ -21,18 +23,18 @@ spec:
           image: consul:v0.6.4
           args:
             - "agent"
-            - "-data-dir=/var/lib/consul"
-            - "-server"
-            - "-ui"
-            - "-bootstrap-expect=1"
-            - "-bind=0.0.0.0"
+            - "-dc=east"
             - "-client=0.0.0.0"
+            - "-config-dir=/opt/consul"
           volumeMounts:
             - name: data
               mountPath: /var/lib/consul
+            - name: config-volume
+              mountPath: /opt/consul
           ports:
             - name: ui-port
               containerPort: 8500
+              hostPort: 8500
             - name: alt-port
               containerPort: 8400
             - name: udp-port
@@ -56,6 +58,10 @@ spec:
           ports:
           - name: exporter
             containerPort: 9107
+            hostPort: 9107
       volumes:
         - name: data
           emptyDir: {}
+        - name: config-volume
+          configMap:
+            name: consul-config

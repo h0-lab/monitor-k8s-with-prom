@@ -49,10 +49,31 @@ kubectl create -f manifests/prometheus-configmap.yml \
 kubectl create -f prometheus/prometheus-deployment.yml \
   --namespace monitoring
 
-## Consul
+###
+# Statsd
+###
+
+# Create the service.
+kubectl create -f statsd-exporter/statsd-exporter-service.yml \
+  --namespace monitoring
+
+kubectl create -f statsd-exporter/statsd-exporter-deployment.yml \
+  --namespace monitoring
+
+###
+# Consul
+###
 
 # Create the service.
 kubectl create -f consul/consul-service.yml \
+  --namespace monitoring
+
+# Then, create the config file.
+kubectl create configmap consul-config \
+  --from-file consul/config-map \
+  --output yaml --dry-run > manifests/consul-configmap.yml
+
+kubectl create -f manifests/consul-configmap.yml \
   --namespace monitoring
 
 # Create the petset.

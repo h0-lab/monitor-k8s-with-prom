@@ -1,9 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: statsd-exporter
+  name: statsd
   annotations:
     prometheus.io/scrape: 'true'
+    prometheus.io/port: '9102'
   labels:
     app: statsd-exporter
 spec:
@@ -13,6 +14,6 @@ spec:
   ports:
   - name: exporter
     port: 9102
-  - name: statsd-listener
+  - name: listener
     port: 9125
     protocol: UDP

@@ -15,6 +15,7 @@ spec:
         ports:
         - name: exporter
         containerPort: 8080
+        hostPort: 8080
         resources:
           requests:
             cpu: 10m

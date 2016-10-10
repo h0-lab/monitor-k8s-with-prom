@@ -15,6 +15,7 @@ spec:
         ports:
         - name: statsd
           containerPort: 9125
+          hostPort: 9125
           protocol: UDP
         - name: exporter
           containerPort: 9102

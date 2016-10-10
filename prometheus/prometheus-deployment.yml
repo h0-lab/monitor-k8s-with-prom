@@ -34,8 +34,8 @@ spec:
         - mountPath: /etc/prometheus
           name: config-volume
       volumes:
-      - emptyDir: {}
-        name: data
-      - configMap:
+      - name: data
+        emptyDir: {}
+      - name: config-volume
+        configMap:
           name: prometheus-config
-        name: config-volume
