@@ -9,14 +9,12 @@ metadata:
     app: consul
 spec:
   type: NodePort
+  selector:
+    app: consul
   ports:
   - name: webui
     port: 8500
     targetPort: 8500
-    protocol: TCP
   - name: exporter
     port: 9107
     targetPort: 9107
-    protocol: TCP
-  selector:
-    app: consul

@@ -10,8 +10,12 @@ spec:
         app: grafana
     spec:
       containers:
-        - image: grafana/grafana:3.1.0
-          name: grafana-core
+        - name: grafana-core
+          image: grafana/grafana:3.1.0
+          ports:
+          - name: webui
+            containerPort: 9090
+            hostPort: 9090
           resources:
             limits:
               cpu: 100m

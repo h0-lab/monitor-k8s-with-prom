@@ -1,8 +1,9 @@
-kind: Deployment
-apiVersion: extensions/v1beta1
+kind: PetSet
+apiVersion: apps/v1alpha1
 metadata:
   name: consul
 spec:
+  serviceName: "nginx"
   replicas: 1
   selector:
     matchLabels:
@@ -11,7 +12,10 @@ spec:
     metadata:
       labels:
         app: consul
+      annotations:
+        pod.alpha.kubernetes.io/initialized: "true"
     spec:
+      terminationGracePeriodSeconds: 0
       containers:
         - name: consul
           image: consul:v0.6.4
@@ -50,8 +54,8 @@ spec:
           args:
           - "-consul.server=localhost:8500"
           ports:
-          - containerPort: 9107
-            protocol: TCP
+          - name: exporter
+            containerPort: 9107
       volumes:
         - name: data
           emptyDir: {}

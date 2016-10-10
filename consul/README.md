@@ -14,11 +14,11 @@ kubectl create -f consul/consul-service.yml \
 ##### Deploy
 
 ```bash
-# Create the deployment.
-kubectl create -f consul/consul-deployment.yml \
+# Create the petset.
+kubectl create -f consul/consul-petset.yml \
   --namespace monitoring
 
-# Check the deployment.
+# Check the petset.
 kubectl get pods \
   --namespace monitoring
 

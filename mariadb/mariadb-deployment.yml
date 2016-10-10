@@ -36,8 +36,8 @@ spec:
             - name: DATA_SOURCE_NAME
               value: "exporter:password@(localhost:3306)/prometheus"
           ports:
-          - containerPort: 9104
-            protocol: TCP
+          - name: exporter
+            containerPort: 9104
       volumes:
         - name: data
           emptyDir: {}

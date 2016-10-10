@@ -3,6 +3,7 @@
 ##### Prep work
 
 See [README.md](../README.md).
+See [Alert Manager](../alertmanager/README.md) for alerts.
 
 ```bash
 # Create the service.
@@ -11,7 +12,7 @@ kubectl create -f prometheus/prometheus-service.yml \
 
 # Then, create the config file.
 kubectl create configmap prometheus-config \
-  --from-file prometheus/config-map/prometheus.yml \
+  --from-file prometheus/config-map \
   --output yaml --dry-run > manifests/prometheus-configmap.yml
 
 kubectl create -f manifests/prometheus-configmap.yml \

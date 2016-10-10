@@ -6,8 +6,8 @@ metadata:
     app: grafana
 spec:
   type: NodePort
-  ports:
-    - port: 3000
-      nodePort: 31000
   selector:
     app: grafana
+  ports:
+    - name: webui
+      port: 3000

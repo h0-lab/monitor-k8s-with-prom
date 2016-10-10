@@ -9,14 +9,12 @@ metadata:
     app: mariadb
 spec:
   type: NodePort
+  selector:
+    app: mariadb
   ports:
   - name: server
     port: 3306
     targetPort: 3306
-    protocol: TCP
   - name: exporter
     port: 9104
     targetPort: 9104
-    protocol: TCP
-  selector:
-    app: mariadb

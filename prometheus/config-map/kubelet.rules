@@ -1,0 +1,8 @@
+ALERT PodSlowToLaunch
+  IF          rate(kubelet_pod_start_latency_microseconds{quantile="0.99"}[1m]) > 5
+  FOR         1h
+  LABELS      { severity="warning" }
+  ANNOTATIONS {
+    summary = "Pods are slow to launch.",
+    description = "Pods are taking longer than 5 milliseconds to launch.",
+  }
