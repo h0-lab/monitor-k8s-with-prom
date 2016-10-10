@@ -14,8 +14,8 @@ spec:
           image: grafana/grafana:3.1.0
           ports:
           - name: webui
-            containerPort: 9090
-            hostPort: 9090
+            containerPort: 3000
+            hostPort: 3000
           resources:
             limits:
               cpu: 100m
