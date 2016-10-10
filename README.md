@@ -7,7 +7,10 @@
 minikube start
 
 # First, create the monitoring namespaces.
-kubectl create -f prometheus/monitoring-namespace.yml
+kubectl create -f monitoring-namespace.yml
+
+# Create the manifests directory.
+mkdir -p manifests/
 ```
 
 ##### Debugging
