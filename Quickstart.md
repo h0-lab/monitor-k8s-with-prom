@@ -6,9 +6,6 @@ minikube start
 # First, create the monitoring namespaces.
 kubectl create -f monitoring-namespace.yml
 
-# Create the manifests directory.
-mkdir -p manifests/
-
 # Create all services.
 find . -iname '*-service.yml' -exec \
   kubectl apply -f {} --namespace=monitoring \;
@@ -26,6 +23,9 @@ for i in "${configmaps[@]}"; do
     --from-file "$i/config-map" \
     --output yaml --dry-run > "manifests/$i-configmap.yml"
 done;
+
+# Create the manifests directory.
+mkdir -p manifests/
 
 # Create all config maps.
 find . -iname '*-configmap.yml' -exec \
