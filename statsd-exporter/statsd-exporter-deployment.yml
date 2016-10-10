@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: statsd-exporter
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: statsd-exporter
+    spec:
+      containers:
+      - name: statsd-exporter
+        image: prom/statsd-exporter:master
+        ports:
+        - name: statsd
+          containerPort: 9125
+          protocol: UDP
+        - name: exporter
+          containerPort: 9102
+          hostPort: 9102
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 500m
+            memory: 2500Mi
