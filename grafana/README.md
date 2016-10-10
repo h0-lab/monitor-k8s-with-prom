@@ -11,9 +11,9 @@ kubectl create -f grafana/grafana-service.yml \
   --namespace monitoring
 
 # Then, create the config file.
-kubectl create configmap grafana-import-dashboards \
+kubectl create configmap grafana-config \
   --from-file grafana/config-map \
-  --output yaml --dry-run > manifests/grafana-import-dashboards-configmap.yml
+  --output yaml --dry-run > manifests/grafana-configmap.yml
 
 kubectl create -f manifests/grafana-import-dashboards-configmap.yml \
   --namespace monitoring

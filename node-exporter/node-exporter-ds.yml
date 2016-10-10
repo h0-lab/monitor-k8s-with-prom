@@ -16,7 +16,6 @@ spec:
         ports:
         - name: exporter
           containerPort: 9100
-          hostPort: 9100
         resources:
           requests:
             cpu: 10m
@@ -27,8 +26,8 @@ spec:
         securityContext:
           privileged: true
         volumeMounts:
-        - mountPath: /rootfs
-          name: rootfs
+        - name: rootfs
+          mountPath: /rootfs
           readOnly: true
       volumes:
       - name: rootfs
