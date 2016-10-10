@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: prom-node-exporter
+spec:
+  template:
+    metadata:
+      name: prom-node-exporter
+      labels:
+        app: prom-node-exporter
+    spec:
+      hostPID: true
+      containers:
+      - name: prom-node-exporter
+        image: prom/node-exporter:master
+        ports:
+        - name: exporter
+          containerPort: 9100
+          hostPort: 9100
+        resources:
+          requests:
+            cpu: 10m
+            memory: 10Mi
+          limits:
+            cpu: 100m
+            memory: 50Mi
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /rootfs
+          name: rootfs
+          readOnly: true
+      volumes:
+      - name: rootfs
+        hostPath:
+          path: /

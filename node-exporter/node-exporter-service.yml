@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+    prometheus.io/scrape: 'true'
+  labels:
+    app: prom-node-exporter
+  name: prom-node-exporter
+spec:
+  type: NodePort
+  selector:
+    app: prom-node-exporter
+  ports:
+  - name: exporter
+    port: 9100
