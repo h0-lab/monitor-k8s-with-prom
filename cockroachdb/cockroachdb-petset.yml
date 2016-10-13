@@ -1,0 +1,35 @@
+kind: PetSet
+apiVersion: apps/v1alpha1
+metadata:
+  name: cockroachdb
+spec:
+  serviceName: "cockroachdb"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cockroachdb
+  template:
+    metadata:
+      labels:
+        app: cockroachdb
+      annotations:
+        pod.alpha.kubernetes.io/initialized: "true"
+    spec:
+      containers:
+        - name: cockroachdb
+          image: cockroachdb/cockroach:beta-20160915
+          args:
+            - "start"
+            - "--insecure"
+          volumeMounts:
+            - name: data
+              mountPath: /cockroach/cockroach-data
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: grpc
+              containerPort: 26257
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: data
+          emptyDir: {}

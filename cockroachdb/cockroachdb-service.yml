@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: cockroachdb
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '_status/vars'
+    prometheus.io/port: '8080'
+  labels:
+    app: cockroachdb
+spec:
+  type: NodePort
+  selector:
+    app: cockroachdb
+  ports:
+  - name: webui
+    port: 8080
+  - name: grpc
+    port: 26257
