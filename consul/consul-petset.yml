@@ -3,7 +3,7 @@ apiVersion: apps/v1alpha1
 metadata:
   name: consul
 spec:
-  serviceName: "nginx"
+  serviceName: "consul"
   replicas: 1
   selector:
     matchLabels:
