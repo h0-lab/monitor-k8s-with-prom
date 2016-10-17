@@ -1,3 +1,4 @@
+##### Getting Started
 
 ```bash
 # Start minikube.
@@ -9,6 +10,9 @@ kubectl create -f monitoring-namespace.yml
 # Create all services.
 find . -iname '*-service.yml' -exec \
   kubectl apply -f {} --namespace=monitoring \;
+
+# Create the manifests directory.
+mkdir -p manifests/
 
 configmaps=(
   alertmanager
@@ -24,15 +28,20 @@ for i in "${configmaps[@]}"; do
     --output yaml --dry-run > "manifests/$i-configmap.yml"
 done;
 
-# Create the manifests directory.
-mkdir -p manifests/
-
 # Create all config maps.
 find . -iname '*-configmap.yml' -exec \
   kubectl apply -f {} --namespace=monitoring \;
 
+# Create all pods.
+find . -iname '*-pod.yml' -exec \
+  kubectl apply -f {} --namespace=monitoring \;
+
+# Create all replication controllers.
+find . -iname '*-replicationcontroller.yml' -exec \
+  kubectl apply -f {} --namespace=monitoring \;
+
 # Create all daemonsets.
-find . -iname '*-ds.yml' -exec \
+find . -iname '*-daemonset.yml' -exec \
   kubectl apply -f {} --namespace=monitoring \;
 
 # Create all deployments.
@@ -49,10 +58,15 @@ find . -iname '*-job.yml' -exec \
 
 # Open dashboard.
 minikube dashboard
+
+# Delete the cluster when done.
+minikube delete
 ```
 
+##### Cleaning up
+
 ```bash
-kubectl delete jobs,petsets,deployments,pods,daemonsets,configmaps,services \
+kubectl delete jobs,petsets,deployments,daemonsets,replicationcontrollers,pods,configmaps,services \
   --namespace monitoring \
   --all
 
