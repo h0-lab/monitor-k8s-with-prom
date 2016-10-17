@@ -21,7 +21,6 @@ kubectl exec prom-node-exporter-442ce \
   --namespace=monitoring -i -t -- sh
 ```
 
-
 ##### Updating Configmaps
 
 ```

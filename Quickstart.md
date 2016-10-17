@@ -49,6 +49,12 @@ find . -iname '*-job.yml' -exec \
 
 # Open dashboard.
 minikube dashboard
+```
+
+```bash
+kubectl delete jobs,petsets,deployments,pods,daemonsets,configmaps,services \
+  --namespace monitoring \
+  --all
 
 # Delete the cluster when done.
 minikube delete
