@@ -14,8 +14,8 @@ spec:
         image: prom/statsd-exporter:master
         ports:
         - name: statsd
-          containerPort: 9125
           protocol: UDP
+          containerPort: 9125
         - name: exporter
           containerPort: 9102
         resources:

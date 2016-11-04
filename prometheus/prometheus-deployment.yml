@@ -19,8 +19,8 @@ spec:
         - -storage.local.retention=24h
         ports:
         - name: webui
-          containerPort: 9090
           hostPort: 9090
+          containerPort: 9090
         resources:
           requests:
             cpu: 100m

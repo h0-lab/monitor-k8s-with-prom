@@ -15,5 +15,5 @@ spec:
   - name: exporter
     port: 9102
   - name: listener
-    port: 9125
     protocol: UDP
+    port: 9125

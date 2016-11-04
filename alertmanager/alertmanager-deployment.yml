@@ -17,8 +17,8 @@ spec:
         - -storage.path=/alertmanager
         ports:
         - name: webui
-          containerPort: 9093
           hostPort: 9093
+          containerPort: 9093
         resources:
           requests:
             cpu: 100m

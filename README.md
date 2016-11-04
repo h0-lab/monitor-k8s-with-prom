@@ -16,6 +16,13 @@ mkdir -p manifests/
 ##### Debugging
 
 ```bash
+# Have minikube be extra verbose.
+minikube start \
+  --vm-driver virtualbox \
+  --v=10 \
+  --show-libmachine-logs \
+  --alsologtostderr
+
 # Pods can also be inspected via a shell.
 kubectl exec prom-node-exporter-442ce \
   --namespace=monitoring -i -t -- sh
