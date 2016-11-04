@@ -15,7 +15,7 @@ kubectl create -f node-exporter/node-exporter-service.yml \
 
 ```bash
 # Create the DaemonSet.
-kubectl create -f node-exporter/node-exporter-ds.yml \
+kubectl create -f node-exporter/node-exporter-daemonset.yml \
   --namespace monitoring
 
 # Check the DaemonSet.

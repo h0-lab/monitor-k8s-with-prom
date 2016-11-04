@@ -4,5 +4,5 @@ ALERT PodSlowToLaunch
   LABELS      { severity="warning" }
   ANNOTATIONS {
     summary = "Pods are slow to launch.",
-    description = "Pods are taking longer than 5 milliseconds to launch.",
+    description = "Pods are taking longer than 5 microseconds to launch.",
   }
