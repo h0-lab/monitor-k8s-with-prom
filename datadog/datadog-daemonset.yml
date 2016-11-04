@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: dd-agent
+spec:
+  template:
+    metadata:
+      name: dd-agent
+      labels:
+        app: dd-agent
+    spec:
+      containers:
+      - name: dd-agent
+        image: datadog/docker-dd-agent:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8125
+            protocol: UDP
+            name: dogstatsdport
+        env:
+          - name: API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: datadog
+                key: api-key
+          - name: KUBERNETES
+            value: "yes"
+        volumeMounts:
+          - name: dockersocket
+            mountPath: /var/run/docker.sock
+          - name: procdir
+            mountPath: /host/proc
+            readOnly: true
+          - name: cgroups
+            mountPath: /host/sys/fs/cgroup
+            readOnly: true
+      volumes:
+        - name: dockersocket
+          hostPath:
+            path: /var/run/docker.sock
+        - name: procdir
+          hostPath:
+            path: /proc
+        - name: cgroups
+          hostPath:
+            path: /sys/fs/cgroup
