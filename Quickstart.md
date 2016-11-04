@@ -56,7 +56,7 @@ find . -iname '*-petset.yml' -exec \
 find . -iname '*-job.yml' -exec \
   kubectl apply -f {} --namespace=monitoring \;
 
-# Open dashboard.
+# Open.
 minikube dashboard
 
 # Delete the cluster when done.

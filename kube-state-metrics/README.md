@@ -23,6 +23,6 @@ kubectl get pods \
   --namespace monitoring
 
 # Open.
-minikube service node-exporter \
+minikube service kube-state-metrics \
   --namespace monitoring
 ```

@@ -35,7 +35,7 @@ kubectl create -f prometheus/prometheus-deployment.yml \
 kubectl get pods \
   --namespace monitoring
 
-# Open prometheus.
+# Open.
 minikube service prometheus \
   --namespace monitoring
 ```
