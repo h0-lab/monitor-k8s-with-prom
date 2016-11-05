@@ -66,7 +66,7 @@ minikube delete
 ##### Cleaning up
 
 ```bash
-kubectl delete jobs,petsets,deployments,daemonsets,replicationcontrollers,pods,configmaps,services \
+kubectl delete jobs,petsets,deployments,daemonsets,replicationcontrollers,pods,configmaps,secrets,services,thirdpartyresources \
   --namespace monitoring \
   --all
 
