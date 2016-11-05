@@ -1,0 +1,22 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: weavescope
+  labels:
+    app: weavescope
+    weavescope-component: weavescope-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: weavescope
+        weavescope-component: weavescope-app
+    spec:
+      containers:
+        - name: weavescope-app
+          image: 'weaveworks/scope:0.17.1'
+          args:
+            - '--no-probe'
+          ports:
+            - containerPort: 4040

@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: weavescope
+  labels:
+    app: weavescope
+    weavescope-component: weavescope-app
+spec:
+  type: NodePort
+  selector:
+    app: weavescope
+    weavescope-component: weavescope-app
+  ports:
+  - name: app
+    port: 4040
