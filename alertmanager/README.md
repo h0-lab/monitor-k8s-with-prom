@@ -9,17 +9,8 @@ See [README.md](../README.md).
 kubectl create -f alertmanager/alertmanager-service.yml \
   --namespace monitoring
 
-# Then, create the config file.
-kubectl create configmap alertmanager-config \
-  --from-file alertmanager/config-map/config.yml \
-  --output yaml --dry-run > manifests/alertmanager-configmap.yml
-
-kubectl create -f manifests/alertmanager-configmap.yml \
-  --namespace monitoring
-
-# Verify that we created the config map.
-kubectl get configmaps alertmanager-config \
-  --output yaml \
+# Create the configmap.
+kubectl create -f alertmanager/alertmanager-configmap.yml \
   --namespace monitoring
 ```
 

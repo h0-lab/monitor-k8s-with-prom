@@ -24,10 +24,10 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 100Mi
+            memory: 15Mi
           limits:
             cpu: 500m
-            memory: 2500Mi
+            memory: 150Mi
         volumeMounts:
         - mountPath: /prometheus
           name: data

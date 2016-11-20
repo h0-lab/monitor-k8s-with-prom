@@ -1,0 +1,18 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: alertmanager-config
+data:
+  config.yml: |
+    global:
+      slack_api_url: '<slack_webhook_url>'
+
+    route:
+      receiver: 'slack-notifications'
+      # All alerts in a notification have the same value for these labels.
+      group_by: [alertname, datacenter, app]
+
+    receivers:
+    - name: 'slack-notifications'
+      slack_configs:
+      - channel: '#alerts'

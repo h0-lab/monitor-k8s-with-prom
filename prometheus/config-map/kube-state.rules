@@ -1,8 +1,0 @@
-ALERT PodRestartingTooMuch
-  IF          rate(kube_pod_container_status_restarts[1m]) > 1/(5*60)
-  FOR         1h
-  LABELS      { severity="warning" }
-  ANNOTATIONS {
-    summary = "Pod {{$labels.namespace}}/{{$label.name}} restarting too much.",
-    description = "Pod {{$labels.namespace}}/{{$label.name}} restarting too much.",
-  }
