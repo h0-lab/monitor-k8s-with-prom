@@ -1,7 +1,7 @@
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-  name: kube-state-metrics-deployment
+  name: kube-state-metrics
 spec:
   replicas: 1
   template:
@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: kube-state-metrics
-        image: gcr.io/google_containers/kube-state-metrics:v0.2.0
+        image: gcr.io/google_containers/kube-state-metrics:v0.3.0
         ports:
         - name: exporter
           containerPort: 8080
@@ -20,5 +20,5 @@ spec:
             cpu: 10m
             memory: 10Mi
           limits:
-            cpu: 100m
-            memory: 50Mi
+            cpu: 25m
+            memory: 20Mi

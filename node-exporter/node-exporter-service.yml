@@ -4,12 +4,12 @@ metadata:
   annotations:
     prometheus.io/scrape: 'true'
   labels:
-    app: prom-node-exporter
-  name: prom-node-exporter
+    app: node-exporter
+  name: node-exporter
 spec:
   type: NodePort
   selector:
-    app: prom-node-exporter
+    app: node-exporter
   ports:
   - name: exporter
     port: 9100

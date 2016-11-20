@@ -1,18 +1,20 @@
-apiVersion: extensions/v1beta1
 kind: DaemonSet
+apiVersion: extensions/v1beta1
 metadata:
-  name: prom-node-exporter
+  name: node-exporter
 spec:
   template:
     metadata:
-      name: prom-node-exporter
+      name: node-exporter
       labels:
-        app: prom-node-exporter
+        app: node-exporter
     spec:
       hostPID: true
       containers:
-      - name: prom-node-exporter
-        image: prom/node-exporter:master
+      - name: node-exporter
+        # image: prom/node-exporter:0.12.0
+        # image: prom/node-exporter:v0.13.0-rc.1
+        image: weaveworks/node_exporter:master-abe8e29
         ports:
         - name: exporter
           # hostPort: 9100
@@ -22,8 +24,8 @@ spec:
             cpu: 10m
             memory: 10Mi
           limits:
-            cpu: 100m
-            memory: 50Mi
+            cpu: 25m
+            memory: 20Mi
         securityContext:
           privileged: true
         volumeMounts:

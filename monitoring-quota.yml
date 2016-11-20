@@ -1,0 +1,18 @@
+kind: ResourceQuota
+apiVersion: v1
+metadata:
+  name: monitoring-quota
+  namespace: monitoring
+spec:
+  hard:
+    requests.cpu: "1"
+    requests.memory: 1Gi
+    limits.cpu: "2"
+    limits.memory: 2Gi
+    pods: "20"
+    persistentvolumeclaims: "4"
+    replicationcontrollers: "15"
+    secrets: "2"
+    resourcequotas: "1"
+    services: "6"
+    services.loadbalancers: "0"

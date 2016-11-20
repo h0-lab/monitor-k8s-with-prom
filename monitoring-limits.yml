@@ -1,0 +1,27 @@
+kind: LimitRange
+apiVersion: v1
+metadata:
+  name: monitoring-limits
+  namespace: monitoring
+spec:
+  limits:
+  - type: Pod
+    max:
+      cpu: 500m
+      memory: 500Mi
+    min:
+      cpu: 10m
+      memory: 3Mi
+  - type: Container
+    default:
+      cpu: 300m
+      memory: 250Mi
+    defaultRequest:
+      cpu: 50m
+      memory: 10Mi
+    max:
+      cpu: 500m
+      memory: 500Mi
+    min:
+      cpu: 10m
+      memory: 3Mi

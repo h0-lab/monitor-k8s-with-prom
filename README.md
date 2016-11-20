@@ -23,14 +23,36 @@ minikube start \
   --show-libmachine-logs \
   --alsologtostderr
 
-# Pods can also be inspected via a shell.
-kubectl exec prom-node-exporter-442ce \
-  --namespace=monitoring -i -t -- sh
+# Open the ui.
+kubectl proxy &
+open http://localhost:8001/ui
+
+# Exec a shell
+kubectl get pods \
+  -l app=dd-agent -o template \
+  --template="{{range.items}}{{.metadata.name}}{{end}}" \
+  --namespace monitoring \
+  | xargs -I{} kubectl exec {} --namespace monitoring -i -t -- sh
+
+# Port Forwarding
+kubectl get pods \
+  -l app=prometheus -o template \
+  --template="{{range.items}}{{.metadata.name}}{{end}}" \
+  --namespace monitoring \
+  | xargs -I{} kubectl port-forward {} --namespace monitoring 9090
 ```
 
 ##### Updating Configmaps
 
 ```
+# Then, create the config file.
+kubectl create configmap grafana-config \
+  --from-file grafana/config-map \
+  --output yaml --dry-run > manifests/grafana-configmap.yml
+
+kubectl create -f manifests/grafana-import-dashboards-configmap.yml \
+  --namespace monitoring
+
 # Recreate the configmap.
 # Waiting for https://github.com/kubernetes/kubernetes/pull/33335
 # to be merged.

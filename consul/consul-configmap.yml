@@ -1,0 +1,17 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: consul-config
+data:
+  config.json: |-
+    {
+      "bootstrap_expect": 1,
+      "server": true,
+      "data_dir": "/var/lib/consul",
+      "log_level": "DEBUG",
+      "node_name": "foobar",
+      "ui": true,
+      "telemetry": {
+         "dogstatsd_addr": "statsd:9125"
+      }
+    }
