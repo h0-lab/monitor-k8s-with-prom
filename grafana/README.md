@@ -15,7 +15,7 @@ kubectl create configmap grafana-config \
   --from-file grafana/config-map \
   --output yaml --dry-run > manifests/grafana-configmap.yml
 
-kubectl create -f manifests/grafana-import-dashboards-configmap.yml \
+kubectl create -f manifests/grafana-configmap.yml \
   --namespace monitoring
 
 # Verify that we created the config map.
@@ -39,7 +39,10 @@ kubectl get pods \
 kubectl create -f grafana/grafana-import-job.yml \
   --namespace monitoring
 
-# Open.
-minikube service grafana \
-  --namespace monitoring
+# View.
+kubectl get pods \
+  -l app=grafana -o template \
+  --template="{{range.items}}{{.metadata.name}}{{end}}" \
+  --namespace monitoring \
+  | xargs -I{} kubectl port-forward {} --namespace monitoring 3000
 ```

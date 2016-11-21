@@ -26,7 +26,10 @@ kubectl create -f prometheus/prometheus-deployment.yml \
 kubectl get pods \
   --namespace monitoring
 
-# Open.
-minikube service prometheus \
-  --namespace monitoring
+# View.
+kubectl get pods \
+  -l app=prometheus -o template \
+  --template="{{range.items}}{{.metadata.name}}{{end}}" \
+  --namespace monitoring \
+  | xargs -I{} kubectl port-forward {} --namespace monitoring 9090
 ```

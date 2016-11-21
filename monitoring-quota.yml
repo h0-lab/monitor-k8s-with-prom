@@ -14,5 +14,5 @@ spec:
     replicationcontrollers: "15"
     secrets: "2"
     resourcequotas: "1"
-    services: "6"
+    services: "8"
     services.loadbalancers: "0"

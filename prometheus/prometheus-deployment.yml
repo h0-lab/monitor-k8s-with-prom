@@ -27,7 +27,7 @@ spec:
             memory: 10Mi
           limits:
             cpu: 50m
-            memory: 150Mi
+            memory: 200Mi
         volumeMounts:
         - mountPath: /prometheus
           name: data
