@@ -7,11 +7,11 @@ See [Prometheus README.md](../prometheus/README.md).
 
 ```bash
 # Create the service.
-kubectl create -f consul/consul-service.yml \
+kubectl apply -f consul/consul-service.yml \
   --namespace monitoring
 
 # Create the configmap.
-kubectl create -f consul/consul-configmap.yml \
+kubectl apply -f consul/consul-configmap.yml \
   --namespace monitoring
 ```
 
@@ -19,7 +19,7 @@ kubectl create -f consul/consul-configmap.yml \
 
 ```bash
 # Create the petset.
-kubectl create -f consul/consul-petset.yml \
+kubectl apply -f consul/consul-petset.yml \
   --namespace monitoring
 
 # Check the petset.

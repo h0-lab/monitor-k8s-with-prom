@@ -1,0 +1,50 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: elasticsearch-logging-v1
+  labels:
+    app: elasticsearch
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    app: elasticsearch
+    version: v1
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+        version: v1
+    spec:
+      containers:
+      - name: elasticsearch
+        image: gcr.io/google_containers/elasticsearch:v2.4.1
+        resources:
+          # need more cpu upon initialization, therefore burstable class
+          limits:
+            cpu: 550m
+            memory: 2Gi
+          requests:
+            cpu: 450m
+            memory: 750Mi
+        ports:
+        - name: db
+          containerPort: 9200
+        - name: transport
+          containerPort: 9300
+        volumeMounts:
+        - name: es-persistent-storage
+          mountPath: /data
+      - name: elasticsearch-exporter
+        image: vimond/elasticsearch_exporter
+        args:
+        - "elasticsearch_exporter"
+        - "-es.uri=http://localhost:9200"
+        - "-web.listen-address=:9108"
+        - "-web.telemetry-path=/metrics"
+        ports:
+        - name: exporter
+          containerPort: 9108
+      volumes:
+      - name: es-persistent-storage
+        emptyDir: {}

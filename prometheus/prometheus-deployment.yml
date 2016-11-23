@@ -22,12 +22,12 @@ spec:
           hostPort: 9090
           containerPort: 9090
         resources:
-          requests:
-            cpu: 10m
-            memory: 10Mi
           limits:
             cpu: 50m
-            memory: 200Mi
+            memory: 400Mi
+          requests:
+            cpu: 10m
+            memory: 100Mi
         volumeMounts:
         - mountPath: /prometheus
           name: data

@@ -6,11 +6,11 @@ See [README.md](../README.md).
 
 ```bash
 # Create the service.
-kubectl create -f alertmanager/alertmanager-service.yml \
+kubectl apply -f alertmanager/alertmanager-service.yml \
   --namespace monitoring
 
 # Create the configmap.
-kubectl create -f alertmanager/alertmanager-configmap.yml \
+kubectl apply -f alertmanager/alertmanager-configmap.yml \
   --namespace monitoring
 ```
 
@@ -18,7 +18,7 @@ kubectl create -f alertmanager/alertmanager-configmap.yml \
 
 ```bash
 # Create the deployment.
-kubectl create -f alertmanager/alertmanager-deployment.yml \
+kubectl apply -f alertmanager/alertmanager-deployment.yml \
   --namespace monitoring
 
 # Check the deployment.

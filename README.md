@@ -63,3 +63,14 @@ kubectl create configmap prometheus-config \
 # Pods will need to be killed to pick up the changes.
 # Issue tracking this: https://github.com/kubernetes/kubernetes/issues/22368
 ```
+
+##### Cleaning up
+
+```bash
+kubectl delete jobs,petsets,deployments,daemonsets,replicationcontrollers,pods,configmaps,secrets,services,thirdpartyresources \
+  --namespace monitoring \
+  --all
+
+# Delete the cluster when done.
+minikube delete
+```

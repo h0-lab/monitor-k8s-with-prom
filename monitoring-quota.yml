@@ -5,10 +5,8 @@ metadata:
   namespace: monitoring
 spec:
   hard:
-    requests.cpu: "1"
-    requests.memory: 1Gi
-    limits.cpu: "2"
-    limits.memory: 2Gi
+    limits.cpu: "6"
+    limits.memory: 6Gi
     pods: "20"
     persistentvolumeclaims: "1"
     replicationcontrollers: "15"

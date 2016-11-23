@@ -7,7 +7,7 @@ See [Prometheus README.md](../prometheus/README.md).
 
 ```bash
 # Create the service.
-kubectl create -f cockroachdb/cockroachdb-service.yml \
+kubectl apply -f cockroachdb/cockroachdb-service.yml \
   --namespace monitoring
 ```
 
@@ -15,7 +15,7 @@ kubectl create -f cockroachdb/cockroachdb-service.yml \
 
 ```bash
 # Create the petset.
-kubectl create -f cockroachdb/cockroachdb-petset.yml \
+kubectl apply -f cockroachdb/cockroachdb-petset.yml \
   --namespace monitoring
 
 # Check the petset.

@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: elasticsearch
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '9108'
+  labels:
+    app: fluentd-elasticsearch-kibana
+spec:
+  type: NodePort
+  selector:
+    app: elasticsearch
+  ports:
+  - name: db
+    port: 9200
+  - name: exporter
+    port: 9108

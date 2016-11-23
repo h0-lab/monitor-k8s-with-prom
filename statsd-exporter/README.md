@@ -7,7 +7,7 @@ See [Prometheus README.md](../prometheus/README.md).
 
 ```bash
 # Create the service.
-kubectl create -f statsd-exporter/statsd-exporter-service.yml \
+kubectl apply -f statsd-exporter/statsd-exporter-service.yml \
   --namespace monitoring
 ```
 
@@ -15,7 +15,7 @@ kubectl create -f statsd-exporter/statsd-exporter-service.yml \
 
 ```bash
 # Create the deployment.
-kubectl create -f statsd-exporter/statsd-exporter-deployment.yml \
+kubectl apply -f statsd-exporter/statsd-exporter-deployment.yml \
   --namespace monitoring
 
 # Check the deployment.

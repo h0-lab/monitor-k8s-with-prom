@@ -7,7 +7,7 @@ See [Prometheus README.md](../prometheus/README.md).
 
 ```bash
 # Create the service.
-kubectl create -f kube-state-metrics/kube-metrics-service.yml \
+kubectl apply -f kube-state-metrics/kube-metrics-service.yml \
   --namespace monitoring
 ```
 
@@ -15,7 +15,7 @@ kubectl create -f kube-state-metrics/kube-metrics-service.yml \
 
 ```bash
 # Create the Deployment.
-kubectl create -f kube-state-metrics/kube-metrics-deployment.yml \
+kubectl apply -f kube-state-metrics/kube-metrics-deployment.yml \
   --namespace monitoring
 
 # Check the Deployment.

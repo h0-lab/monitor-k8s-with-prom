@@ -7,7 +7,7 @@ See [Prometheus README.md](../prometheus/README.md).
 
 ```bash
 # Create the service.
-kubectl create -f mariadb/mariadb-service.yml \
+kubectl apply -f mariadb/mariadb-service.yml \
   --namespace monitoring
 ```
 
@@ -15,7 +15,7 @@ kubectl create -f mariadb/mariadb-service.yml \
 
 ```bash
 # Create the deployment.
-kubectl create -f mariadb/mariadb-deployment.yml \
+kubectl apply -f mariadb/mariadb-deployment.yml \
   --namespace monitoring
 
 # Check the deployment.

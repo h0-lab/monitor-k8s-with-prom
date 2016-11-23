@@ -7,8 +7,8 @@ spec:
   limits:
   - type: Pod
     max:
-      cpu: "1"
-      memory: 1Gi
+      cpu: "3"
+      memory: 3Gi
     min:
       cpu: 10m
       memory: 3Mi
@@ -20,8 +20,8 @@ spec:
       cpu: 50m
       memory: 10Mi
     max:
-      cpu: "1"
-      memory: 1Gi
+      cpu: "3"
+      memory: 3Gi
     min:
       cpu: 10m
       memory: 3Mi

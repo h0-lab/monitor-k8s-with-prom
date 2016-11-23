@@ -7,11 +7,11 @@ See [Alert Manager](../alertmanager/README.md) for alerts.
 
 ```bash
 # Create the service.
-kubectl create -f prometheus/prometheus-service.yml \
+kubectl apply -f prometheus/prometheus-service.yml \
   --namespace monitoring
 
 # Create the configmap.
-kubectl create -f prometheus/prometheus-configmap.yml \
+kubectl apply -f prometheus/prometheus-configmap.yml \
   --namespace monitoring
 ```
 
@@ -19,7 +19,7 @@ kubectl create -f prometheus/prometheus-configmap.yml \
 
 ```bash
 # Create the deployment.
-kubectl create -f prometheus/prometheus-deployment.yml \
+kubectl apply -f prometheus/prometheus-deployment.yml \
   --namespace monitoring
 
 # Check the deployment.

@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: kibana
+  labels:
+    app: fluentd-elasticsearch-kibana
+spec:
+  type: NodePort
+  selector:
+    app: kibana
+  ports:
+  - name: ui
+    port: 5601

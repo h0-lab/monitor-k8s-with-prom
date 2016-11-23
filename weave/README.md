@@ -6,7 +6,7 @@ See [README.md](../README.md).
 
 ```bash
 # Create the service.
-kubectl create -f weave/weavescope-service.yml \
+kubectl apply -f weave/weavescope-service.yml \
   --namespace monitoring
 ```
 
@@ -14,11 +14,11 @@ kubectl create -f weave/weavescope-service.yml \
 
 ```bash
 # Create the daemonset.
-kubectl create -f weave/weavescope-daemonset.yml \
+kubectl apply -f weave/weavescope-daemonset.yml \
   --namespace monitoring
 
 # Create the deployment.
-kubectl create -f weave/weavescope-deployment.yml \
+kubectl apply -f weave/weavescope-deployment.yml \
   --namespace monitoring
 
 # Check the deployment.

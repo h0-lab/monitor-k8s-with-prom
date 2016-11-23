@@ -7,7 +7,7 @@ See [Prometheus README.md](../prometheus/README.md).
 
 ```bash
 # Create the service.
-kubectl create -f node-exporter/node-exporter-service.yml \
+kubectl apply -f node-exporter/node-exporter-service.yml \
   --namespace monitoring
 ```
 
@@ -15,7 +15,7 @@ kubectl create -f node-exporter/node-exporter-service.yml \
 
 ```bash
 # Create the DaemonSet.
-kubectl create -f node-exporter/node-exporter-daemonset.yml \
+kubectl apply -f node-exporter/node-exporter-daemonset.yml \
   --namespace monitoring
 
 # Check the DaemonSet.

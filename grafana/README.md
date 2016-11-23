@@ -41,7 +41,7 @@ kubectl create -f grafana/grafana-import-job.yml \
 
 # View.
 kubectl get pods \
-  -l app=grafana -o template \
+  -l app=grafana,kind=ui -o template \
   --template="{{range.items}}{{.metadata.name}}{{end}}" \
   --namespace monitoring \
   | xargs -I{} kubectl port-forward {} --namespace monitoring 3000
