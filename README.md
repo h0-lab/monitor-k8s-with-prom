@@ -67,10 +67,7 @@ kubectl create configmap prometheus-config \
 ##### Cleaning up
 
 ```bash
-kubectl delete jobs,petsets,deployments,daemonsets,replicationcontrollers,pods,configmaps,secrets,services,thirdpartyresources \
+kubectl delete jobs,petsets,deployments,daemonsets,replicationcontrollers,replicasets,pods,configmaps,secrets,services,thirdpartyresources \
   --namespace monitoring \
   --all
-
-# Delete the cluster when done.
-minikube delete
 ```
